@@ -37,5 +37,13 @@ module.exports = ({ mode }) => {
     const isProductionMode = mode === 'prod';
     const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
 
-    return merge(baseConfig, envConfig);
+    return merge(baseConfig, envConfig, {
+        // Webpack Dev Server Configuration Options
+        devServer: {
+            static: path.resolve(__dirname, 'dist'), // Replace 'dist' with the directory where your static files are located
+            compress: true,
+            port: 8080,
+            open: true,
+        },
+    });
 };
